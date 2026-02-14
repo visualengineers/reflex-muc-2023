@@ -2,3 +2,4 @@ export/data/data_all.csv
 export/data/data_experiment.csv
 export/img/single/*.jpg
 export/img/single/*.svg
+.DS_Store
