@@ -106,6 +106,7 @@ For each participant two files exist:
   * load data either from `export/data/results_experiment_cleanedDuration.csv` (cleaned-up interaction times) or from `export/data/results_experiment.csv`
   * computes statistics for duration and
   * correctness of results
+  * mean difference between reported and expected layer result
 * `study_outcome`: computes statistics regarding success rate of reported layers and numbers
 * `study_turning-points`, `study_peaks`:
   * computes turning points
