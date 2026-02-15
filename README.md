@@ -94,20 +94,27 @@ For each participant two files exist:
 
 ## Notebooks
 
-* `study_convertMissingColumns`: used to reconstruct the empty columns for layer numbers in the first trials (one-time fix)
-* `convert_results`:
+* `preprocess_convertMissingColumns`: used to reconstruct the empty columns for layer numbers in the first trials (one-time fix)
+* `preprocess_convert_results`:
   * merges separate results for each proband in one large result file (json and data) - do this, when new data is added, as `export/data/data_experiment.csv` is not in version control (too large)
   * computes additional columns
   * computes cleaned up interaction phase and saves times and markers to associated columns in results / data
-* `study_general`: first raw extraction of results on separate data files
-* `study_results`:
+* `preprocess_fix_p19`: merge datasets of participant 19 (restart of application after Block 1) + switches reported number and layer
+* `preprocess_export_SPSS`: transformation of Datset and export for direct analysis in SPSS
+* `study_questionnaire-general`: first raw extraction of results on separate data files
+* `study_duration`:
   * load data either from `export/data/results_experiment_cleanedDuration.csv` (cleaned-up interaction times) or from `export/data/results_experiment.csv`
   * computes statistics for duration and
   * correctness of results
-* `study_turning-points`:
+* `study_outcome`: computes statistics regarding success rate of reported layers and numbers
+* `study_turning-points`, `study_peaks`:
   * computes turning points
   * compute cleaned up interaction data by removing leading and trailing idle times
 * `study_frametimes`: compute frametimes from `data_all.csv`
+* `study_layerChanges`: statistics for number of layer changes during the trial
+* `study_inLayerDurations`: statistics for for mean durations of holding a layer during the trial
+* `study_validity`: descriptive statistics and plots for general study procedure
+* `study_regressio_plots`: regression analysis and plots for devleopment of mean trial duration ober the blocks in respect to the conditions
 
 ## update results
 
