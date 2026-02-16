@@ -94,32 +94,47 @@ For each participant two files exist:
 
 ## Notebooks
 
-* `study_convertMissingColumns`: used to reconstruct the empty columns for layer numbers in the first trials (one-time fix)
-* `convert_results`:
+* `preprocess_convertMissingColumns`: used to reconstruct the empty columns for layer numbers in pre-experiment data (one-time fix for test runs)
+* `preprocess_convert_results`:
   * merges separate results for each proband in one large result file (json and data) - do this, when new data is added, as `export/data/data_experiment.csv` is not in version control (too large)
   * computes additional columns
   * computes cleaned up interaction phase and saves times and markers to associated columns in results / data
-* `study_general`: first raw extraction of results on separate data files
-* `study_results`:
+* `preprocess_fix_p19`: merge datasets of participant 19 (restart of application after Block 1) + switches reported number and layer
+* `preprocess_export_SPSS`: transformation of Datset and export for direct analysis in SPSS
+* `study_questionnaire-general`: first raw extraction of results on separate data files
+* `study_duration`:
   * load data either from `export/data/results_experiment_cleanedDuration.csv` (cleaned-up interaction times) or from `export/data/results_experiment.csv`
   * computes statistics for duration and
   * correctness of results
-* `study_turning-points`:
+  * mean difference between reported and expected layer result
+* `study_outcome`: computes statistics regarding success rate of reported layers and numbers
+* `study_turning-points`, `study_peaks`:
   * computes turning points
   * compute cleaned up interaction data by removing leading and trailing idle times
-* `study_frametimes`: compute frametimes from `data_all.csv`
+* `study_frametimes`: compute frametimes from `data_all.csv` to validate the tracking quality during the experiment
+* `study_layerChanges`: statistics for number of layer changes during the trial
+* `study_inLayerDurations`: statistics for for mean durations of holding a layer during the trial
+* `study_validity`: descriptive statistics and plots for general study procedure
+* `study_regression_plots`: regression analysis and plots for devleopment of mean trial duration ober the blocks in respect to the conditions
 
 ## update results
 
 in case of new results added, execute the following steps in the given order:
 
 1. add missing `;` at the end of the header in the newly added `.csv` files
-2. run `convert_results.ipynb` to update the result including the computed values
-3. run the follwing nb files in arbitrary order:
-   * `study_results.ipynb`
-   * `study_frametimes.ipynb`
+2. run `preprocess_convert_results.ipynb` to update the result including the computed values
+3. optional: run `preprocess_export_SPSS.ipynb` to generate exports suitable for SPSS analysis
+4. run the following nb files in arbitrary order:
+   * `study_questionnaire-general.ipynb`
+   * `study_duration.ipynb`
+   * `study_outcome.ipynb`
    * `study_inLayerDurations.ipynb`
-   * `study_border-durations.ipynb`
+   * `study_layer-changes.ipynb`
+   * `study_peaks.ipynb`
    * `study_turning-points.ipynb`
+   * `study_regression_plots.ipynb`
+5. for validating data quality, run the following Notebooks in arbitrary order:
+   * `study_frametimes.ipynb`
+   * `study_validity.ipynb`
 
 afterwards, the exported csv -files can be re-imported to spss to regenerate the statistics results.
